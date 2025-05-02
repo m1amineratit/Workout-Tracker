@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3><i class="fas fa-dumbbell me-2"></i>Your Workout Dashboard</h3>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4>Recent Workouts</h4>
+                    <a href="/add-workout" class="btn btn-success">
+                        <i class="fas fa-plus-circle me-1"></i> Add New Workout
+                    </a>
+                </div>
+                
+                <!-- Workout Summary Stats -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card bg-light text-center">
+                            <div class="card-body">
+                                <h5><i class="fas fa-calendar-check me-2"></i>This Week</h5>
+                                <h2 class="display-4">{{ count }}</h2>
+                                <p class="text-muted">Workouts completed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-light text-center">
+                            <div class="card-body">
+                                <h5><i class="fas fa-fire me-2"></i>Total Duration</h5>
+                                <h2 class="display-4">3.5</h2>
+                                <p class="text-muted">Hours this week</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-light text-center">
+                            <div class="card-body">
+                                <h5><i class="fas fa-trophy me-2"></i>Streak</h5>
+                                <h2 class="display-4">5</h2>
+                                <p class="text-muted">Days in a row</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Workout List -->
+                <div class="workout-list">
+                    <h5 class="mb-3">Your Recent Workouts</h5>
+                    
+                    {% for workout in workouts %}
+                    <!-- Workout Item -->
+                    <div class="card mb-3">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h5 class="card-title">{{ workout.exercice }}</h5>
+                            <p class="card-text text-muted">
+                              <i class="far fa-calendar me-1"></i> {{ workout.date }}
+                              <i class="far fa-clock ms-3 me-1"></i> {{ workout.get_duration_minutes|floatformat:0 }} mins
+                            </p>
+                          </div>
+                          <div>
+                            <a href="#" class="btn btn-sm btn-outline-primary me-2"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></a>
+                          </div>
+                        </div>
+                        <div class="mt-2">
+                          <span class="badge bg-info me-1">{{ workout.exercice.name }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  
+
+                    
+                    <!-- Show more button -->
+                    <div class="text-center mt-3">
+                        <a href="#" class="btn btn-outline-primary">Load More Workouts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

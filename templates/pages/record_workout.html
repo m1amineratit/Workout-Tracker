@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}Add Workout{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white">
+                <h3><i class="fas fa-plus-circle me-2"></i>Add New Workout</h3>
+            </div>
+            <div class="card-body">
+                <form action="/add-workout" method="post">
+                    <!-- Workout Title -->
+                    <div class="mb-3">
+                        <label for="workoutTitle" class="form-label">Workout Title</label>
+                        <input type="text" class="form-control" id="workoutTitle" name="workoutTitle" required 
+                               placeholder="E.g., Morning Run, Upper Body Strength, Yoga Session">
+                    </div>
+                    
+                    <!-- Date and Time -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="workoutDate" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="workoutDate" name="workoutDate" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="workoutTime" class="form-label">Time</label>
+                            <input type="time" class="form-control" id="workoutTime" name="workoutTime" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Duration -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="workoutDuration" class="form-label">Duration (minutes)</label>
+                            <input type="number" class="form-control" id="workoutDuration" name="workoutDuration" 
+                                   min="1" required placeholder="E.g., 30, 45, 60">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="workoutType" class="form-label">Workout Type</label>
+                            <select class="form-select" id="workoutType" name="workoutType" required>
+                                <option value="" selected disabled>Select workout type</option>
+                                <option value="strength">Strength Training</option>
+                                <option value="cardio">Cardio</option>
+                                <option value="hiit">HIIT</option>
+                                <option value="yoga">Yoga</option>
+                                <option value="pilates">Pilates</option>
+                                <option value="crossfit">CrossFit</option>
+                                <option value="swimming">Swimming</option>
+                                <option value="running">Running</option>
+                                <option value="cycling">Cycling</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Workout Tags -->
+                    <div class="mb-3">
+                        <label class="form-label">Body Focus (select all that apply)</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="chest" id="focusChest" name="bodyFocus[]">
+                                    <label class="form-check-label" for="focusChest">Chest</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="back" id="focusBack" name="bodyFocus[]">
+                                    <label class="form-check-label" for="focusBack">Back</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="shoulders" id="focusShoulders" name="bodyFocus[]">
+                                    <label class="form-check-label" for="focusShoulders">Shoulders</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="arms" id="focusArms" name="bodyFocus[]">
+                                    <label class="form-check-label" for="focusArms">Arms</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="legs" id="focusLegs" name="bodyFocus[]">
+                                    <label class="form-check-label" for="focusLegs">Legs</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="glutes" id="focusGlutes" name="bodyFocus[]">
+                                    <label class="form-check-label" for="focusGlutes">Glutes</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="abs" id="focusAbs" name="bodyFocus[]">
+                                    <label class="form-check-label" for="focusAbs">Abs</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="fullbody" id="focusFullBody" name="bodyFocus[]">
+                                    <label class="form-check-label" for="focusFullBody">Full Body</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="cardio" id="focusCardio" name="bodyFocus[]">
+                                    <label class="form-check-label" for="focusCardio">Cardio</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Workout Notes -->
+                    <div class="mb-3">
+                        <label for="workoutNotes" class="form-label">Workout Notes</label>
+                        <textarea class="form-control" id="workoutNotes" name="workoutNotes" rows="4" 
+                                  placeholder="Enter details about exercises, sets, reps, or how you felt"></textarea>
+                    </div>
+                    
+                    <!-- Rating -->
+                    <div class="mb-3">
+                        <label class="form-label">How was this workout?</label>
+                        <div class="d-flex">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="workoutRating" id="rating1" value="1">
+                                <label class="form-check-label" for="rating1">1 <i class="far fa-sad-tear text-danger"></i></label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="workoutRating" id="rating2" value="2">
+                                <label class="form-check-label" for="rating2">2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="workoutRating" id="rating3" value="3" checked>
+                                <label class="form-check-label" for="rating3">3 <i class="far fa-meh text-warning"></i></label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="workoutRating" id="rating4" value="4">
+                                <label class="form-check-label" for="rating4">4</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="workoutRating" id="rating5" value="5">
+                                <label class="form-check-label" for="rating5">5 <i class="far fa-smile-beam text-success"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="reset" class="btn btn-outline-secondary me-md-2">
+                            <i class="fas fa-undo me-1"></i> Reset
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i> Save Workout
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

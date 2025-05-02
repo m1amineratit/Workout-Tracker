@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white">
+                <h3><i class="fas fa-sign-in-alt me-2"></i>Login to Your Account</h3>
+            </div>
+            <div class="card-body">
+                <!-- Alert for errors -->
+                <div class="alert alert-danger d-none" id="loginError">
+                    Invalid email or password. Please try again.
+                </div>
+                
+                <form action="/login" method="post" id="loginForm">
+                    <!-- Email input -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input type="email" class="form-control" id="email" name="email" required 
+                                   placeholder="Enter your email">
+                        </div>
+                    </div>
+                    
+                    <!-- Password input -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <input type="password" class="form-control" id="password" name="password" required
+                                   placeholder="Enter your password">
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Remember me checkbox -->
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                        <a href="/forgot-password" class="float-end">Forgot password?</a>
+                    </div>
+                    
+                    <!-- Submit button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt me-1"></i> Login
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Sign up link -->
+                <div class="text-center mt-4">
+                    <p>Don't have an account? <a href="/signup">Sign up now</a></p>
+                </div>
+                
+                <!-- Social login -->
+                <div class="mt-4">
+                    <p class="text-center mb-3">Or login with</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button class="btn btn-outline-primary">
+                            <i class="fab fa-google me-1"></i> Google
+                        </button>
+                        <button class="btn btn-outline-primary">
+                            <i class="fab fa-facebook-f me-1"></i> Facebook
+                        </button>
+                        <button class="btn btn-outline-dark">
+                            <i class="fab fa-apple me-1"></i> Apple
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom JavaScript for this page -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            
+            // Toggle eye icon
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+    });
+</script>
+{% endblock %}
