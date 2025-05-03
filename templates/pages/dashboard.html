@@ -12,7 +12,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h4>Recent Workouts</h4>
-                    <a href="/add-workout" class="btn btn-success">
+                    <a href="{% url 'add_workout' %}" class="btn btn-success">
                         <i class="fas fa-plus-circle me-1"></i> Add New Workout
                     </a>
                 </div>
@@ -32,8 +32,8 @@
                         <div class="card bg-light text-center">
                             <div class="card-body">
                                 <h5><i class="fas fa-fire me-2"></i>Total Duration</h5>
-                                <h2 class="display-4">3.5</h2>
-                                <p class="text-muted">Hours this week</p>
+                                <h2 class="display-4">{{ total_duration }}</h2>
+                                <p class="text-muted">mins this week</p>
                             </div>
                         </div>
                     </div>
@@ -58,15 +58,15 @@
                       <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h5 class="card-title">{{ workout.exercice }}</h5>
+                            <h5 class="card-title">{{ workout.title }}</h5>
                             <p class="card-text text-muted">
                               <i class="far fa-calendar me-1"></i> {{ workout.date }}
                               <i class="far fa-clock ms-3 me-1"></i> {{ workout.get_duration_minutes|floatformat:0 }} mins
                             </p>
                           </div>
                           <div>
-                            <a href="#" class="btn btn-sm btn-outline-primary me-2"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></a>
+                            <a href="{% url 'update_workout' %}" class="btn btn-sm btn-outline-primary me-2"><i class="fas fa-edit"></i></a>
+                            <a href="{% url 'delete_workout' workout.pk %}" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></a>
                           </div>
                         </div>
                         <div class="mt-2">

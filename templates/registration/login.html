@@ -15,14 +15,15 @@
                     Invalid email or password. Please try again.
                 </div>
                 
-                <form action="/login" method="post" id="loginForm">
+                <form action="" method="post" id="loginForm">
+                    {% csrf_token %}
                     <!-- Email input -->
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
+                        <label for="text" class="form-label">Username</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            <input type="email" class="form-control" id="email" name="email" required 
-                                   placeholder="Enter your email">
+                            <input type="text" class="form-control" id="email" name="username" required 
+                                   placeholder="Enter your Username">
                         </div>
                     </div>
                     

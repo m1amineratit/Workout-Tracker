@@ -10,11 +10,12 @@
                 <h3><i class="fas fa-plus-circle me-2"></i>Add New Workout</h3>
             </div>
             <div class="card-body">
-                <form action="/add-workout" method="post">
+                <form method="post">
+                    {% csrf_token %}
                     <!-- Workout Title -->
                     <div class="mb-3">
                         <label for="workoutTitle" class="form-label">Workout Title</label>
-                        <input type="text" class="form-control" id="workoutTitle" name="workoutTitle" required 
+                        <input type="text" class="form-control" id="workoutTitle" name="title" required 
                                placeholder="E.g., Morning Run, Upper Body Strength, Yoga Session">
                     </div>
                     
@@ -22,38 +23,51 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="workoutDate" class="form-label">Date</label>
-                            <input type="date" class="form-control" id="workoutDate" name="workoutDate" required>
+                            <input type="date" class="form-control" id="workoutDate" name="date" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="workoutTime" class="form-label">Time</label>
-                            <input type="time" class="form-control" id="workoutTime" name="workoutTime" required>
+                            <label for="workoutDuration" class="form-label">Number of repetitions</label>
+                            <input type="number" class="form-control" id="workoutDuration" name="number_of_repetitions" 
+                            required placeholder="E.g., 1, 2, 3">
+                        </div>
+                        <div class="col-md-6 ">
+                            <label for="workoutTime" class="form-label">Start</label>
+                            <input type="time" class="form-control" id="workoutTime" name="start" required>
+                            <label for="workoutTime" class="form-label">End</label>
+                            <input type="time" class="form-control" id="workoutTime" name="end" required>
                         </div>
                     </div>
-                    
                     <!-- Duration -->
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="workoutDuration" class="form-label">Duration (minutes)</label>
-                            <input type="number" class="form-control" id="workoutDuration" name="workoutDuration" 
-                                   min="1" required placeholder="E.g., 30, 45, 60">
+                            <input type="number" class="form-control" id="workoutDuration" name="duration" 
+                                min="1" required placeholder="E.g., 30, 45, 60">
                         </div>
+
                         <div class="col-md-6">
                             <label for="workoutType" class="form-label">Workout Type</label>
                             <select class="form-select" id="workoutType" name="workoutType" required>
                                 <option value="" selected disabled>Select workout type</option>
-                                <option value="strength">Strength Training</option>
-                                <option value="cardio">Cardio</option>
-                                <option value="hiit">HIIT</option>
-                                <option value="yoga">Yoga</option>
-                                <option value="pilates">Pilates</option>
-                                <option value="crossfit">CrossFit</option>
-                                <option value="swimming">Swimming</option>
-                                <option value="running">Running</option>
-                                <option value="cycling">Cycling</option>
-                                <option value="other">Other</option>
+                                {% for exercice in exercices %}
+                                    <option value="{{ exercice.category }}">{{ exercice.category }}</option>
+                                {% endfor %}
                             </select>
                         </div>
+
+                        <br>
+                        <div class="col-md-6">
+                            <label for="workoutDuration" class="form-label">Sets</label>
+                            <input type="number" class="form-control" id="workoutDuration" name="sets" 
+                            required placeholder="E.g., 3, 5, 6">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="workoutDuration" class="form-label">Duration (minutes)</label>
+                            <input type="number" class="form-control" id="workoutDuration" name="weigth" 
+                                min="1" required placeholder="E.g., 30kg, 45kg, 60kg">
+                        </div>
                     </div>
+
                     
                     <!-- Workout Tags -->
                     <div class="mb-3">
@@ -61,45 +75,15 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="chest" id="focusChest" name="bodyFocus[]">
-                                    <label class="form-check-label" for="focusChest">Chest</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="back" id="focusBack" name="bodyFocus[]">
-                                    <label class="form-check-label" for="focusBack">Back</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="shoulders" id="focusShoulders" name="bodyFocus[]">
-                                    <label class="form-check-label" for="focusShoulders">Shoulders</label>
+                                    <select class="form-select" id="workoutType" name="workoutType" required>
+                                        <option value="" selected disabled>Select workout type</option>
+                                        {% for exercice in exercices %}
+                                            <option value="{{ exercice.id }}">{{ exercice.muscle }}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="arms" id="focusArms" name="bodyFocus[]">
-                                    <label class="form-check-label" for="focusArms">Arms</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="legs" id="focusLegs" name="bodyFocus[]">
-                                    <label class="form-check-label" for="focusLegs">Legs</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="glutes" id="focusGlutes" name="bodyFocus[]">
-                                    <label class="form-check-label" for="focusGlutes">Glutes</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="abs" id="focusAbs" name="bodyFocus[]">
-                                    <label class="form-check-label" for="focusAbs">Abs</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="fullbody" id="focusFullBody" name="bodyFocus[]">
-                                    <label class="form-check-label" for="focusFullBody">Full Body</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="cardio" id="focusCardio" name="bodyFocus[]">
-                                    <label class="form-check-label" for="focusCardio">Cardio</label>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -107,7 +91,7 @@
                     <!-- Workout Notes -->
                     <div class="mb-3">
                         <label for="workoutNotes" class="form-label">Workout Notes</label>
-                        <textarea class="form-control" id="workoutNotes" name="workoutNotes" rows="4" 
+                        <textarea class="form-control" id="workoutNotes" name="workout_notes" rows="4" 
                                   placeholder="Enter details about exercises, sets, reps, or how you felt"></textarea>
                     </div>
                     
@@ -115,26 +99,13 @@
                     <div class="mb-3">
                         <label class="form-label">How was this workout?</label>
                         <div class="d-flex">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="workoutRating" id="rating1" value="1">
-                                <label class="form-check-label" for="rating1">1 <i class="far fa-sad-tear text-danger"></i></label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="workoutRating" id="rating2" value="2">
-                                <label class="form-check-label" for="rating2">2</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="workoutRating" id="rating3" value="3" checked>
-                                <label class="form-check-label" for="rating3">3 <i class="far fa-meh text-warning"></i></label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="workoutRating" id="rating4" value="4">
-                                <label class="form-check-label" for="rating4">4</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="workoutRating" id="rating5" value="5">
-                                <label class="form-check-label" for="rating5">5 <i class="far fa-smile-beam text-success"></i></label>
-                            </div>
+                            {% for value, label in form.rating.field.choices %}
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="rating" id="rating{{ value }}" value="{{ value }}"
+                                           {% if form.rating.value == value %}checked{% endif %}>
+                                    <label class="form-check-label" for="rating{{ value }}">{{ value }} - {{ label }}</label>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                     
