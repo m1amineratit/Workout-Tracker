@@ -16,21 +16,22 @@
             {% csrf_token %}
 
             <div class="row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="title" class="form-label">Workout Title</label>
+                    <br>
                     {{ form.title }}
                 </div>
-
-                <div class="col-md-3 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="date" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="date" name="date" required value="{{ workout.date|date:'Y-m-d' }}">
+                    <br>
                     {{ form.date }}
                 </div>
 
-                <div class="col-md-3 mb-3">
+                <div class="col-md-4 mb-3">
                     <label for="time" class="form-label">Time</label>
-                    <input type="time" class="form-control" id="time" name="time" required value="{{ workout.time|time:'H:i' }}">
-                    {{ form.time }}
+                    <br>
+                    {{ form.start }}
+                    {{ form.end }}
 
                 </div>
             </div>
@@ -38,29 +39,31 @@
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label for="type" class="form-label">Workout Type</label>
-                    <select class="form-select" id="type" name="type" required>
-                        <option value="">-- Select --</option>
-                        <option value="Cardio" {% if workout.type == "Cardio" %}selected{% endif %}>Cardio</option>
-                        <option value="Strength" {% if workout.type == "Strength" %}selected{% endif %}>Strength</option>
-                        <option value="Flexibility" {% if workout.type == "Flexibility" %}selected{% endif %}>Flexibility</option>
-                        <option value="Balance" {% if workout.type == "Balance" %}selected{% endif %}>Balance</option>
+                    <select class="form-select" id="workoutType" name="workoutType" required>
+                        <option value="" selected disabled>Select workout type</option>
+                        {% for exercice in exercices %}
+                            <option value="{{ exercice.id }}">{{ exercice.muscle }}</option>
+                        {% endfor %}
                     </select>
                 </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="intensity" class="form-label">Body Focus</label>
+                    <select class="form-select" id="workoutType" name="workoutType" required>
+                        <option value="" selected disabled>Select workout type</option>
+                        {% for exercice in exercices %}
+                            <option value="{{ exercice.id }}">{{ exercice.muscle }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
 
                 <div class="col-md-4 mb-3">
                     <label for="duration" class="form-label">Duration (minutes)</label>
-                    <input type="number" class="form-control" id="duration" name="duration" min="1" required value="{{ workout.duration }}">
+                    <br>
+                    {{ form.duration }}
                 </div>
 
-                <div class="col-md-4 mb-3">
-                    <label for="intensity" class="form-label">Intensity</label>
-                    <select class="form-select" id="intensity" name="intensity" required>
-                        <option value="">-- Select --</option>
-                        <option value="Low" {% if workout.intensity == "Low" %}selected{% endif %}>Low</option>
-                        <option value="Medium" {% if workout.intensity == "Medium" %}selected{% endif %}>Medium</option>
-                        <option value="High" {% if workout.intensity == "High" %}selected{% endif %}>High</option>
-                    </select>
-                </div>
             </div>
 
             <div class="mb-3">

@@ -42,6 +42,7 @@ def record_work(request):
 @login_required
 def update_workout(request, pk):
     workout = get_object_or_404(Workout, pk=pk)
+    exercices = Exercice.objects.all()
     if request.method == 'POST':
         form = WorkoutForm(request.POST, instance=workout)
         if form.is_valid():
@@ -53,7 +54,7 @@ def update_workout(request, pk):
 
     else:
         form = WorkoutForm(instance=workout)
-    return render(request, 'pages/update_workout.html', {'form' : form})
+    return render(request, 'pages/update_workout.html', {'form' : form, 'exercices' : exercices})
 
 @login_required
 def delete_workout(request, pk):
