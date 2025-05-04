@@ -75,3 +75,10 @@ class Workout(models.Model):
     
         duration = end_seconds + start_seconds
         return duration / 60
+
+
+class Reward(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
+    points = models.PositiveIntegerField(default=0)
+

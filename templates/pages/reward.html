@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">🎯 Reward System</h2>
+
+    <!-- Workout Section -->
+<!-- Workout Section -->
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        Workout Details
+    </div>
+    {% if workout %}
+        <div class="card-body">
+            <h5 class="card-title">{{ workout.title }}</h5>
+            <p class="card-text"><strong>Status:</strong> {{ workout.complete|yesno:"Completed,Incomplete" }}</p>
+        </div>
+    {% else %}
+        <div class="card-body">
+            <p>No workout found.</p>
+        </div>
+    {% endif %}
+</div>
+
+
+    <!-- Current Reward Section -->
+    <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+            Your Reward for This Workout
+        </div>
+        <div class="card-body">
+            <p><strong>Points:</strong> {{ reward.points }}</p>
+            <p><strong>Workout:</strong> {{ reward.workout.title }}</p>
+        </div>
+    </div>
+
+    <!-- All Rewards Section -->
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+            All Your Rewards
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for r in rewards %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ r.workout.name }} 
+                    <span class="badge bg-primary rounded-pill">{{ r.points }} pts</span>
+                </li>
+            {% empty %}
+                <li class="list-group-item">No rewards yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

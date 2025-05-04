@@ -40,9 +40,11 @@
                     <div class="col-md-4">
                         <div class="card bg-light text-center">
                             <div class="card-body">
-                                <h5><i class="fas fa-trophy me-2"></i>Streak</h5>
-                                <h2 class="display-4">5</h2>
-                                <p class="text-muted">Days in a row</p>
+                                <h5><i class="fas fa-trophy me-2"></i>Points</h5>
+                                {% for reward in reward %}
+                                <h2 class="display-4">{{ reward.points }}</h2>
+                                <p class="text-muted">Total Points 🔥</p>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -64,8 +66,14 @@
                               <i class="far fa-clock ms-3 me-1"></i> {{ workout.get_duration_minutes|floatformat:0 }} mins
                             </p>
                           </div>
+                          {% if workout and not workout.complete %}
+                          <form method="post" action="{% url 'complete_workout' workout.id %}">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-success mt-3">Mark as Complete & Claim Reward</button>
+                          </form>
+                          {% endif %}
                           <div>
-                            <a href="{% url 'update_workout' %}" class="btn btn-sm btn-outline-primary me-2"><i class="fas fa-edit"></i></a>
+                            <a href="{% url 'update_workout' workout.pk %}" class="btn btn-sm btn-outline-primary me-2"><i class="fas fa-edit"></i></a>
                             <a href="{% url 'delete_workout' workout.pk %}" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></a>
                           </div>
                         </div>
