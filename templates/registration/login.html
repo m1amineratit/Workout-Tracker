@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "core/base.html" %}
 
 {% block title %}Login{% endblock %}
 
@@ -57,7 +57,7 @@
                 
                 <!-- Sign up link -->
                 <div class="text-center mt-4">
-                    <p>Don't have an account? <a href="/signup">Sign up now</a></p>
+                    <p>Don't have an account? <a href="{% url 'register' %}">Sign up now</a></p>
                 </div>
                 
                 <!-- Social login -->

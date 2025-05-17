@@ -10,6 +10,7 @@ def register_view(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            user.save()
             login(request, user)
         else:
             print(form.errors)
