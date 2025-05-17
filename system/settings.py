@@ -143,3 +143,5 @@ LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'login'
+
+

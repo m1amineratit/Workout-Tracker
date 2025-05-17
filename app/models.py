@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 from datetime import datetime
 
 # Create your models here.
 
 
-User = get_user_model()
+from django.contrib.auth.models import User
 
 class Exercice(models.Model):
     STATUS_CHOICE = (
