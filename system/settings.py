@@ -26,11 +26,10 @@ SECRET_KEY = 'django-insecure-2ig%kh&&sz9e*=6tx2@6$piugr*r))&5x5%4u*k0yyw1*5j3m&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost' , '127.0.0.1', 'gymtracker.up.railway.app']
-
+ALLOWED_HOSTS = ['localhost' , '127.0.0.1', 'dailytrack.up.railway.app']
 
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ['https://gymtracker.up.railway.app'] 
+CSRF_TRUSTED_ORIGINS = ['https://dailytrack.up.railway.app'] 
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
